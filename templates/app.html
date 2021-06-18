@@ -1,0 +1,120 @@
+{% extends "header.html" %}
+{% block content %}
+<html>
+
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+	<div class="body col">
+		<!-- <div class="title center">
+			<h3>First Follow Calculator</h3>
+		</div> -->
+		<div class="card">
+			{% if data['starting_symbol']=="_" %}
+			<form class="col" action="/" method="POST">
+				<div class="row">
+					<div class="col">
+						<div class="text">No. of terminals</div>
+						<input class="inputBox" type="text" name="not" />
+					</div>
+					<div class="col left">
+						<div class="text">Enter Terminals</div>
+						<input class="inputBox" type="text" name="ts" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="text">No. of non-terminals</div>
+						<input class="inputBox" type="text" name="nont" />
+					</div>
+					<div class="col left">
+						<div class="text">Enter Non-Terminals</div>
+						<input class="inputBox" type="text" name="nts" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="text">No. of Productions</div>
+						<input class="inputBox" type="text" name="nop" />
+					</div>
+					<div class="col left">
+						<div class="text">Enter Productions</div>
+						<input class="inputBox" type="text" name="ps" />
+					</div>
+				</div>
+				<div class="row center">
+					<div class="col">
+						<div class="text">Enter start symbol</div>
+						<input class="inputBox" type="text" name="ss" />
+					</div>
+				</div>
+				<div class="center">
+					<button class="button" type="submit">Calculate</button>
+				</div>
+			</form>
+			{% else %}
+			<div>
+				<span class="text">Data Productions:</span>
+				<hr className="container mt-2"
+					style=" outline: none; border: none; background-color: rgb(145, 145, 145); height: 1px;" />
+				<div class="text prod">
+					{%for nt in data.non_terminals%}
+					{{nt + " "}} {{"->"}}
+					{% for i in range((data.productions[nt]|length) -1 )%}
+					{{data.productions[nt][i]}} /
+					{% endfor %} {{(data.productions[nt].pop())}}<br />
+					{% endfor %}
+
+				</div>
+				<hr className="container mt-2"
+					style=" outline: none; border: none; background-color: rgb(145, 145, 145); height: 1px;" />
+				<table class="centered">
+					<thead>
+						<tr>
+							<th>Non-Terminal</th>
+							<th>First</th>
+							<th>Follow</th>
+						</tr>
+					</thead>
+					{%for nt in data.non_terminals%}
+					<tbody>
+						<tr>
+							<td>{{nt}}</td>
+							<td>
+								{%for i in range(data.FIRST[nt]|length) %}
+								{% if i == (data.FIRST[nt]|length -1)%}
+								{{data.FIRST[nt][i] + " "}}
+								{% else%}
+								{{data.FIRST[nt][i] + " "}},
+								{%endif%}
+								{% endfor %}
+							</td>
+							<td>
+								{%for i in range(data.FOLLOW[nt]|length) %}
+								{% if i == (data.FOLLOW[nt]|length -1)%}
+								{{data.FOLLOW[nt][i] + " "}}
+								{% else%}
+								{{data.FOLLOW[nt][i] + " "}},
+								{%endif%}
+								{% endfor %}
+							</td>
+						</tr>
+					</tbody>
+					{%endfor%}
+
+				</table>
+			</div>
+			{%endif%}
+		</div>
+		<div style="color: gray;">2021 |<a style="color: gray;" href="https://github.com/RiyaNegi/firstfollow"
+				target="_blank"> View source
+				code on github</a>
+		</div>
+	</div>
+</body>
+
+</html>
+{% endblock %}

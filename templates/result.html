@@ -1,0 +1,41 @@
+{% extends "header.html" %}
+{% block content %}
+
+<head>
+    <title>Calculator</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <div class="card">
+        <table class="centered">
+            <thead>
+                <tr>
+                    <th class="col s4">Non-Terminal</th>
+                    <th class="col s4">First</th>
+                    <th class="col s4">Follow</th>
+                </tr>
+            </thead>
+            {%for nt in data.non_terminals%}
+
+            <tbody class="centered">
+                <tr>
+                    <td class="col s4">Alvin</td>
+                    <td class="col s4">{{data.FIRST[nt]}}</td>
+                    <td class="col s4">{{data.FOLLOW[nt]}}</td>
+                </tr>
+            </tbody>
+            {%endfor%}
+
+        </table>
+        <div class="center">
+            <button class="button" type="submit">Re-calculate</button>
+        </div>
+    </div>
+</body>
+
+
+{% endblock %}

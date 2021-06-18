@@ -1,0 +1,22 @@
+<head>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='materialize.css') }}">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="" class=" center navHeading">
+        <li><a href="/">FIRST-FOLLOW CALCULATOR</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <br>
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
